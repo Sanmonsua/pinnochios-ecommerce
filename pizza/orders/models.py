@@ -8,11 +8,11 @@ class Category(models.Model):
         return f"{self.name}"
 
 
-class Dish(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length=64)
     smallPrice = models.FloatField()
     largePrice = models.FloatField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
+    category = models.ForeignKey(Category, related_name='options', on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.category}"
@@ -20,7 +20,7 @@ class Dish(models.Model):
 
 class Topping(models.Model):
     name = models.CharField(max_length=64)
-    dishes = models.ManyToManyField(Dish, blank=True, related_name='toppings')
+    products = models.ManyToManyField(Product, blank=True, related_name='toppings')
 
     def __str__(self):
         return f"{self.name}"

@@ -1,13 +1,18 @@
 {% extends 'orders/base.html' %}
-
+{% load widget_tweaks %}
 {% block title %}
   SignUp - Pinocchios
 {% endblock %}
 
 {% block content %}
   <form method="post">
-    {{form.as_p}}
     {%csrf_token%}
+    {% for field in form.visible_fields %}
+      <div class="form-group">
+        <label>{{ field.label_tag }}</label>
+        {% render_field field class="form-control" %}
+      </div>
+    {% endfor %}
     <button type="submit" >Create Account</button>
   </form>
   <a href="/login">Already a member? Login now</a>

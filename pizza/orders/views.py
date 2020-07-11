@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .forms import RegistrationForm, LoginForm
 from django.shortcuts import render, redirect
 from .models import Category, Product, Topping
 
@@ -17,9 +17,9 @@ def index(request):
 
 def do_login(request):
     #This view logs in the user
-    form = AuthenticationForm()
+    form = LoginForm()
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = LoginForm(data=request.POST)
 
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -39,10 +39,10 @@ def do_login(request):
 
 
 def signup(request):
-    form = UserCreationForm()
+    form = RegistrationForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        form = RegistrationForm(data=request.POST)
         if form.is_valid():
             user = form.save()
             if user is not None:

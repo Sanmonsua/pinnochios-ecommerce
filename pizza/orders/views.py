@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, logout, login
-from .forms import RegistrationForm, LoginForm
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import RegistrationForm
 from django.shortcuts import render, redirect
 from .models import Category, Product, Topping
 
@@ -17,9 +18,9 @@ def index(request):
 
 def do_login(request):
     #This view logs in the user
-    form = LoginForm()
+    form = AuthenticationForm()
     if request.method == 'POST':
-        form = LoginForm(data=request.POST)
+        form = AuthenticationForm(data=request.POST)
 
         if form.is_valid():
             username = form.cleaned_data['username']

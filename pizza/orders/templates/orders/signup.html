@@ -1,0 +1,14 @@
+{% extends 'orders/base.html' %}
+
+{% block title %}
+  SignUp - Pinocchios
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {{form.as_p}}
+    {%csrf_token%}
+    <button type="submit" >Create Account</button>
+  </form>
+  <a href="/login">Already a member? Login now</a>
+{% endblock%}

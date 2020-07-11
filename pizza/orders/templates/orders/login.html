@@ -1,0 +1,16 @@
+{% extends 'orders/base.html' %}
+
+{% block title %}
+  LogIn - Pinocchios
+{% endblock %}
+
+{% block content %}
+  <h2>LogIn - Pinnocchios Pizza & Subs</h2>
+  <form method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Login</button>
+  </form>
+
+  <a href="/signup">Dont have an account? Register now</a>
+{% endblock %}

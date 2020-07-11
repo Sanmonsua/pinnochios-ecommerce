@@ -1,21 +1,52 @@
 {% extends 'orders/base.html' %}
+
 {% load widget_tweaks %}
+{% load static %}
+
 {% block title %}
   LogIn - Pinocchios
 {% endblock %}
 
 {% block content %}
-  <h2>LogIn - Pinnocchios Pizza & Subs</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form.visible_fields %}
-      <div class="form-group">
-        <label>{{ field.label_tag }}</label>
-        {% render_field field class="form-control" %}
-      </div>
-    {% endfor %}
-    <button type="submit">Login</button>
-  </form>
+  <div class="signin text-center" style="height:100%;">
+    <form class="form-signin" method="post" novalidate>
 
-  <a href="/signup">Dont have an account? Register now!</a>
+        <!--<img class="mb-4" src="" alt="" width="100" height="100">-->
+        <h1 class="h3 mb-3 font-weight-normal">Welcome! Please Log-in</h1>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="form-group">
+          {% for field in form.visible_fields %}
+
+              {% if form.is_bound %}
+                {% if field.errors %}
+                  {% render_field field class="form-control is-invalid  " placeholder=field.label %}
+                  {% for error in field.errors %}
+                    <div class="invalid-feedback">
+                      {{ error }}
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  {% render_field field class="form-control is-valid" placeholder=field.label %}
+                {% endif %}
+              {% else %}
+                {% render_field field class="form-control" placeholder=field.label %}
+              {% endif %}
+
+          {% endfor %}
+
+        </div>
+
+        <button style="margin-bottom: 10px; border-radius:15px;"class="btn btn-lg btn-primary button btn-block" type="submit"><strong>Log in</strong></button>
+        <a class="links"href="/signup">Not registered? Create an account</a>
+    </form>
+  </div>
 {% endblock %}

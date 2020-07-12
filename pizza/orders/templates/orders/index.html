@@ -9,10 +9,21 @@
 
 {% block content %}
   <nav class="navbar navbar-light fixed-top bg-light">
-    <a class="navbar-brand" href="/">
-      <img src="{% static 'orders/logo2.png' %}" width="auto" height="55" class="d-inline-block align-top" alt="" loading="lazy">
-    </a>
-    <a href="/logout" class="btn btn-outline-danger">Logout</a>
+    <div class="container col">
+      <a class="navbar-brand" href="/">
+        <img src="{% static 'orders/logo2.png' %}" width="auto" height="55" class="d-inline-block align-top" alt="" loading="lazy">
+      </a>
+    </div>
+
+    <div class="container col-2 col-md-3 col-lg-2 col-xl-2">
+      <a href="#" class="cart position-relative d-inline-flex" aria-label="View your shopping cart">
+        <i class="fas fa fa-shopping-cart fa-lg"></i>
+        <span class="cart-basket d-flex align-items-center justify-content-center">0</span>
+      </a>
+      <a href="/logout" class="btn btn-outline-danger">Logout</a>
+    </div>
+
+
   </nav>
 
 {% endblock %}

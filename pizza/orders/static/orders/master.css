@@ -89,3 +89,61 @@ btn-round-lg {
   border-color: #cb2d3e;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
 }
+
+.badge {
+  padding-left : 9px;
+  padding-right : 9px;
+  -webkit-border-radius : 9px;
+  -moz-border-radius : 9px;
+  border-radius : 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+
+#lblCartCount {
+  font-size : 12px;
+  background : #ff0000;
+  color : #fff;
+  padding : 0 5px;
+  vertical-align : top;
+  margin-left : -10px;
+}
+
+.badge:after{
+  content : attr(value);
+  font-size : 15px;
+  background : #cb2d3e;
+  border-radius : 100%;
+  padding : 3px;
+  position : relative;
+  left : -8px;
+  top : -10px;
+  opacity : 0.95;
+  color : #eee;
+}
+
+a.cart:hover {
+  text-decoration: none;
+  color: #cb2d3e;
+}
+
+a.cart {
+  font-size: 1.5rem;
+  color: #343a40;
+  margin: 15px;
+}
+
+.cart-basket {
+  font-size: .6rem;
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  color: #fff;
+  background-color: #cb2d3e;
+  border-radius: 50%;
+}

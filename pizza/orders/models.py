@@ -23,7 +23,7 @@ class Product(models.Model):
     smallPrice = models.FloatField()
     largePrice = models.FloatField()
     category = models.ForeignKey(Category, related_name='options', on_delete=models.CASCADE, blank=True)
-
+    image = models.ImageField(blank=True, null=True, upload_to='products/')
     def __str__(self):
         return f"{self.name} - {self.category}"
 

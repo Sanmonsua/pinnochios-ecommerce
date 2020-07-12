@@ -4,6 +4,10 @@ body {
   background-color: #eeeeee;
 }
 
+.navbar {
+  border-bottom : 1px solid #e5edef;
+}
+
 .link {
   color : #cb2d3e;
 }

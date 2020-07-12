@@ -1,15 +1,18 @@
 {% extends 'orders/base.html' %}
+
 {% load widget_tweaks %}
+{% load static %}
 
 {% block title %}
   Home - Pinocchios Pizza & Subs
 {% endblock %}
 
 {% block content %}
-  <ul>
-    {% for category in categories %}
-      <li>{{category}}</li>
-    {% endfor %}
-  </ul>
-  <a href="/logout" class="btn btn-danger">Logout</a>
+  <nav class="navbar navbar-light fixed-top bg-light">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'orders/logo2.png' %}" width="auto" height="55" class="d-inline-block align-top" alt="" loading="lazy">
+    </a>
+    <a href="/logout" class="btn btn-outline-danger">Logout</a>
+  </nav>
+
 {% endblock %}

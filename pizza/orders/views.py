@@ -7,7 +7,15 @@ from .models import Category, Product, Topping
 
 def index(request):
     if request.user.is_authenticated:
-        categories = Category.objects.all()
+        categories_objects = Category.objects.all()
+        categories = []
+        for category in categories_objects:
+            c = {}
+            c['name'] = category
+            c['products'] = []
+            for p in category.options.all():
+                c['products'].append(p)
+            categories.append(c)
         context = {
             "categories" : categories,
             "username" : request.user.username

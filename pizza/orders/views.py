@@ -9,7 +9,8 @@ def index(request):
     if request.user.is_authenticated:
         categories = Category.objects.all()
         context = {
-            "categories" : categories
+            "categories" : categories,
+            "username" : request.user.username
         }
         return render(request, 'orders/index.html', context=context)
 

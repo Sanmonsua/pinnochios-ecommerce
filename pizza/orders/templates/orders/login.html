@@ -11,8 +11,8 @@
   <div class="signin text-center" style="height:100%;">
     <form class="form-signin" method="post" novalidate>
 
-        <!--<img class="mb-4" src="" alt="" width="100" height="100">-->
-        <h1 class="h3 mb-3 font-weight-normal">Welcome! Please Log-in</h1>
+        <img class="mb-4" src="{% static 'orders/logo.png' %}" alt="" width="200" height="200">
+        <h1 class="h3 mb-3 font-weight-normal"><strong> Welcome! Please Log-in </strong></h1>
         {% csrf_token %}
 
         {% if form.non_field_errors %}
@@ -46,7 +46,7 @@
         </div>
 
         <button style="margin-bottom: 10px; border-radius:15px;"class="btn btn-lg btn-primary button btn-block" type="submit"><strong>Log in</strong></button>
-        <a class="links"href="/signup">Not registered? Create an account</a>
+        <a class="link" href="/signup">Not registered? Create an account</a>
     </form>
   </div>
 {% endblock %}

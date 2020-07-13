@@ -34,3 +34,32 @@ class Topping(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
+class AddOn(models.Model):
+    name = models.CharField(max_length=64)
+    products = models.ManyToManyField(Product, blank=True, related_name='toppings')
+    price = models.FloatField()
+
+    def __str__(self):
+        return f"{self.name} - ${self.price}"
+
+
+class CartItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True)
+    quantity = models.IntegerField()
+
+    LARGE = 'Large'
+    SMALL = 'Small'
+
+    SIZE_CHOICES = (
+        (LARGE, 'L'),
+        (SMALL, 'S')
+    )
+    size = models.CharField(max_length=64, choices=SIZE_CHOICES, default=SMALL)
+
+    toppings = models.ManyToManyField(Topping, blank=True)
+    add_ons = models.ManyToManyField(AddOn, blank=True)
+
+    def calculateTotalPrice(self):
+        if self.size==LARGE:

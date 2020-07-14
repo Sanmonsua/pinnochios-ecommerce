@@ -20,6 +20,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=64)
+    description = models.TextField(blank=True)
     smallPrice = models.FloatField()
     largePrice = models.FloatField()
     category = models.ForeignKey(Category, related_name='options', on_delete=models.CASCADE, blank=True)

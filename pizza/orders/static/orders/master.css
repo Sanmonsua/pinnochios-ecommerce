@@ -185,3 +185,22 @@ a.cart {
   color: #cb2d3e;
   border-color: none;
 }
+
+.card {
+  border: none;
+  border-radius: 15px;
+  background-color: #eeeeee;
+}
+
+.card::after {
+    content: "";
+    display: block;
+    padding-top: 25px;
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid rgba(229, 229, 228, .6);
+}
+
+.card-img {
+  border-radius: 15px;
+}

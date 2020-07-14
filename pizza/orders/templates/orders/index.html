@@ -42,24 +42,40 @@ Home - Pinocchios Pizza & Subs
     </p>
   </div>
 </section>
-<section class="py-5" id="menu">
+<section id="menu">
   <div class="container">
     {% for c in categories %}
-    <h1>{{c.name}}</h1>
-    {%for p in c.products%}
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <img src="{{ p.image.url }}" width="150" height="150" class="card-img">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{{p.name}}</h5>
+    <h1 class="py-5">{{c.name}}</h1>
+
+    <div class="card-deck">
+      {%for p in c.products%}
+      <div class="product-box col-12 col-sm-6 mb-4 h-100">
+        <div class="card" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-4">
+              <img src="{{ p.image.url }}" width="150" height="150" class="card-img">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title">{{p.name}}</h5>
+                <div style="height:60px">
+                  <p class="card-text text-muted">{{p.description}}</p>
+                </div>
+                <div class="row">
+                  <p class="card-text col-8"><strong>$ {{p.smallPrice|floatformat:2}} - {{p.largePrice|floatformat:2}}</strong></p>
+                  <a href="#" style="margin-bottom:0;"class="col-4 btn btn-primary button">Add</a>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+
+
     {% endfor %}
   </div>
 </section>

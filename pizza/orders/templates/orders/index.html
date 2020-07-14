@@ -33,23 +33,35 @@ Home - Pinocchios Pizza & Subs
 
 
 </nav>
-<div class="container">
-  {% for c in categories %}
-  <h1>{{c.name}}</h1>
-  {%for p in c.products%}
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="{{ p.image.url }}" width="150" height="150" class="card-img">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">{{p.name}}</h5>
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="my-2">Our Menu</h1>
+    <p class="lead text-muted my-2">
+      Noch's has been in business for over 50 years.<br> We've been feeding Harvard and the surrounding area since 1966,<br>
+      We sell award-winning sicilian-style pizza and mouth-watering steak subs!
+    </p>
+  </div>
+</section>
+<section class="py-5" id="menu">
+  <div class="container">
+    {% for c in categories %}
+    <h1>{{c.name}}</h1>
+    {%for p in c.products%}
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{{ p.image.url }}" width="150" height="150" class="card-img">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{p.name}}</h5>
+          </div>
         </div>
       </div>
     </div>
+    {% endfor %}
+    {% endfor %}
   </div>
-  {% endfor %}
-  {% endfor %}
-</div>
+</section>
+
 {% endblock %}

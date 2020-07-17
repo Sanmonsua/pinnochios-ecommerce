@@ -98,16 +98,35 @@ Home - Pinocchios Pizza & Subs
             <p class="text-muted">gsageefhfdhdfhdh</p>
             <hr>
             <br>
-            <h5>Select the size: <small class="text-muted">(Mandatory)</small></h5>
+            <h5>Select the size:</h5>
             <hr>
             <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
+              <label class="custom-control-label" for="customRadio1">Small</label>
             </div>
             <div class="custom-control custom-radio">
               <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+              <label class="custom-control-label" for="customRadio2">Large</label>
             </div>
+            <br>
+            <div id="toppings">
+              <h5>Select the toppings:</h5>
+              <hr>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+              </div>
+            </div>
+            <br>
+            <div id="addons">
+              <h5>Select the add-ons: <small class="text-muted">(Optional)</small></h5>
+              <hr>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck2">
+                <label class="custom-control-label" for="customCheck2">Check this custom checkbox</label>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -117,4 +136,5 @@ Home - Pinocchios Pizza & Subs
     </div>
   </div>
 </div>
+
 {% endblock %}

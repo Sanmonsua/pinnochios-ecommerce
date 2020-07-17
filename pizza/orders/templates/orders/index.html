@@ -45,7 +45,7 @@ Home - Pinocchios Pizza & Subs
 <section id="menu">
   <div class="container">
     {% for c in categories %}
-    <h1 class="py-5">{{c.name}}</h1>
+    <h1 class="py-5"><strong>{{c.name}}</strong></h1>
 
     <div class="card-deck">
       {%for p in c.products%}
@@ -57,7 +57,7 @@ Home - Pinocchios Pizza & Subs
             </div>
             <div class="col-8">
               <div class="card-body">
-                <h5 class="card-title">{{p.name}}</h5>
+                <h5 class="card-title"><strong>{{p.name}}</strong></h5>
                 <div style="height:60px">
                   <p class="card-text text-muted">{{p.description}}</p>
                 </div>

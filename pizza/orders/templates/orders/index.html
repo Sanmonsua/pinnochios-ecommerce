@@ -81,7 +81,7 @@ Home - Pinocchios Pizza & Subs
 </section>
 <!-- Modal Section (PopUp for the add to cart form)-->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div style="border-radius:15px"class="modal-dialog modal-lg modal-dialog-scrollable">
+  <div style="border-radius:15px" class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -100,17 +100,13 @@ Home - Pinocchios Pizza & Subs
             <br>
             <h5>Select the size: <small class="text-muted">(Mandatory)</small></h5>
             <hr>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Small $12.76
-              </label>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-              <label class="form-check-label" for="exampleRadios2">
-                Large $13.67
-              </label>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
             </div>
           </div>
         </div>

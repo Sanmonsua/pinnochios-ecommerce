@@ -36,8 +36,8 @@ def product_detail(request, product_id):
         "name" : p.name,
         "description" : p.description,
         "category" : p.category.name,
-        "smallPrice" : p.smallPrice,
-        "largePrice" : p.smallPrice,
+        "smallPrice" : format(p.smallPrice, '.2f'),
+        "largePrice" : format(p.largePrice, '.2f'),
         "toppings" : [
             t.name for t in p.toppings.all()
         ]

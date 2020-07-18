@@ -32,15 +32,27 @@ def product_detail(request, product_id):
         p = Product.objects.get(pk=product_id)
     except Product.DoesNotExist:
         raise Http404("Product does not exist")
+    toppings = []
+    for topping in p.toppings.all():
+        t = {}
+        t['name'] = topping.name
+        t['id'] = topping.id
+        toppings.append(t)
+    addons = []
+    for addon in p.addons.all():
+        a = {}
+        a['name'] = addon.name
+        a['id'] = addon.id
+        a['price'] = addon.price
+        addons.append(a)
     product_data = {
         "name" : p.name,
         "description" : p.description,
         "category" : p.category.name,
         "smallPrice" : format(p.smallPrice, '.2f'),
         "largePrice" : format(p.largePrice, '.2f'),
-        "toppings" : [
-            t.name for t in p.toppings.all()
-        ]
+        "toppings" : toppings,
+        "addons" : addons
     }
     return JsonResponse(product_data)
 

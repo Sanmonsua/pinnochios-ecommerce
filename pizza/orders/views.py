@@ -29,11 +29,20 @@ def index(request):
 
 def product_detail(request, product_id):
     try:
-        p = Product.objects.filter(id=product_id)
+        p = Product.objects.get(pk=product_id)
     except Product.DoesNotExist:
         raise Http404("Product does not exist")
-    product_data = serializers.serialize('json', p)
-    return JsonResponse(product_data, safe=False)
+    product_data = {
+        "name" : p.name,
+        "description" : p.description,
+        "category" : p.category.name,
+        "smallPrice" : p.smallPrice,
+        "largePrice" : p.smallPrice,
+        "toppings" : [
+            t.name for t in p.toppings.all()
+        ]
+    }
+    return JsonResponse(product_data)
 
 
 def do_login(request):

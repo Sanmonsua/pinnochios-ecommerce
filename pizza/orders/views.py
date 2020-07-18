@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegistrationForm
+from django.core import serializers
+from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect
 from .models import Category, Product, Topping
 
@@ -23,6 +25,15 @@ def index(request):
         return render(request, 'orders/index.html', context=context)
 
     return redirect('/login')
+
+
+def product_detail(request, product_id):
+    try:
+        p = Product.objects.filter(id=product_id)
+    except Product.DoesNotExist:
+        raise Http404("Product does not exist")
+    product_data = serializers.serialize('json', p)
+    return JsonResponse(product_data, safe=False)
 
 
 def do_login(request):

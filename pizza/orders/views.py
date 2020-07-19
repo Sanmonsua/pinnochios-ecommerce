@@ -52,6 +52,7 @@ def product_detail(request, product_id):
         "smallPrice" : format(p.smallPrice, '.2f'),
         "largePrice" : format(p.largePrice, '.2f'),
         "toppings" : toppings,
+        "max_toppings" : p.max_toppings,
         "addons" : addons
     }
     return JsonResponse(product_data)

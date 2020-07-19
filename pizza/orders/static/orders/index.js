@@ -23,10 +23,16 @@ function get_product(product_id){
     document.querySelector("#product-large-price").innerHTML = "Large $" + data.largePrice;
     let toppingsSection = document.querySelector('#toppings');
     toppingsSection.innerHTML = "";
-    data.toppings.forEach(t =>{
-      const topping = toppingTemplate({"id":t.id, "name":t.name});
-      toppingsSection.innerHTML += topping;
-    });
+    if (data.toppings.length > 0){
+      document.querySelector("#toppings-section").style.display = "block";
+      data.toppings.forEach(t =>{
+        const topping = toppingTemplate({"id":t.id, "name":t.name});
+        toppingsSection.innerHTML += topping;
+      });
+    } else {
+      document.querySelector("#toppings-section").style.display = "none";
+    }
+
   }
 
   request.send();

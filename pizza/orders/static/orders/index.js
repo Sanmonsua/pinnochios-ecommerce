@@ -32,6 +32,17 @@ function get_product(product_id){
     } else {
       document.querySelector("#toppings-section").style.display = "none";
     }
+    let addonsSection = document.querySelector('#addons');
+    addonsSection.innerHTML = "";
+    if (data.addons.length > 0){
+      document.querySelector("#addons-section").style.display = "block";
+      data.addons.forEach(a =>{
+        const addon = addonTemplate({"id":a.id, "name":a.name, "price":a.price});
+        addonsSection.innerHTML += addon;
+      });
+    } else {
+      document.querySelector("#addons-section").style.display = "none";
+    }
 
   }
 

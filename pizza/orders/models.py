@@ -18,11 +18,13 @@ class Category(models.Model):
         return f"{self.name}"
 
 
+
+
 class Product(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField(blank=True)
-    smallPrice = models.FloatField()
-    largePrice = models.FloatField()
+    small_price = models.FloatField()
+    large_price = models.FloatField()
     category = models.ForeignKey(Category, related_name='options', on_delete=models.CASCADE, blank=True)
     image = models.ImageField(blank=True, null=True, upload_to='products/')
     max_toppings = models.IntegerField(default=0)
@@ -54,3 +56,8 @@ class CartItem(models.Model):
     toppings = models.ManyToManyField(Topping, blank=True)
     add_ons = models.ManyToManyField(AddOn, blank=True)
     price = models.FloatField()
+
+
+class Order(models.Model):
+    items = models.ManyToManyField(CartItem, related_name="orders")
+    total_price = models.IntegerField(default=0)

@@ -8,7 +8,23 @@ Home - Pinocchios Pizza & Subs
 {% endblock %}
 
 {% block templates %}
-  <script src="{% static 'orders/index.js' %}" charset="utf-8"></script>
+<script id="topping" type="text/template">
+  {% verbatim %}
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input topping" id="{{id}}">
+    <label class="custom-control-label" for="{{id}}">{{name}}</label>
+  </div>
+  {% endverbatim %}
+</script>
+<script id="addon" type="text/template">
+  {% verbatim %}
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input addon" id="{{id}}">
+    <label class="custom-control-label" for="{{id}}">{{name}}. + ${{price}}</label>
+  </div>
+  {% endverbatim %}
+</script>
+<script src="{% static 'orders/index.js' %}" charset="utf-8"></script>
 {% endblock %}
 
 {% block content %}
@@ -67,7 +83,7 @@ Home - Pinocchios Pizza & Subs
                 </div>
                 <div class="row">
                   <p class="card-text col-8"><strong>$ {{p.smallPrice|floatformat:2}} - {{p.largePrice|floatformat:2}}</strong></p>
-                  <button style="margin-bottom:0;" class="col-4 btn btn-primary button" data-product="{{p.id}}" data-toggle="modal" data-target="#staticBackdrop">Add</button>
+                  <button style="margin-bottom:0;" class="col-4 product btn btn-primary button" data-product="{{p.id}}" data-toggle="modal" data-target="#staticBackdrop">Add</button>
                 </div>
 
               </div>
@@ -98,39 +114,36 @@ Home - Pinocchios Pizza & Subs
             <img src="{% static 'orders/logo.png' %}" class="col-12">
           </div>
           <div class="col-6">
-            <h3>Cheese - Regular Pizza</h3>
-            <p class="text-muted">gsageefhfdhdfhdh</p>
+            <h3 id="product-name"></h3>
+            <p id="product-description" class="text-muted"></p>
             <hr>
             <br>
             <h5>Select the size:</h5>
             <hr>
             <div class="custom-control custom-radio">
               <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
-              <label class="custom-control-label" for="customRadio1">Small</label>
+              <label class="custom-control-label" id="product-small-price" for="customRadio1"></label>
             </div>
             <div class="custom-control custom-radio">
               <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio2">Large</label>
+              <label class="custom-control-label" for="customRadio2" id="product-large-price"></label>
             </div>
             <br>
+            <h5>Select the toppings:</h5>
+            <hr>
             <div id="toppings">
-              <h5>Select the toppings:</h5>
-              <hr>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
-              </div>
+
             </div>
             <br>
+
+            <h5>Select the add-ons: <small class="text-muted">(Optional)</small></h5>
+            <hr>
             <div id="addons">
-              <h5>Select the add-ons: <small class="text-muted">(Optional)</small></h5>
-              <hr>
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck2">
                 <label class="custom-control-label" for="customCheck2">Check this custom checkbox</label>
               </div>
             </div>
-
           </div>
         </div>
       </div>

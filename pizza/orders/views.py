@@ -49,8 +49,8 @@ def product_detail(request, product_id):
         "name" : p.name,
         "description" : p.description,
         "category" : p.category.name,
-        "smallPrice" : format(p.smallPrice, '.2f'),
-        "largePrice" : format(p.largePrice, '.2f'),
+        "smallPrice" : format(p.small_price, '.2f'),
+        "largePrice" : format(p.large_price, '.2f'),
         "toppings" : toppings,
         "max_toppings" : p.max_toppings,
         "addons" : addons

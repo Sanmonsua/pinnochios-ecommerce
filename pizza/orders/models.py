@@ -54,6 +54,7 @@ class CartItem(models.Model):
     toppings = models.ManyToManyField(Topping, blank=True)
     add_ons = models.ManyToManyField(AddOn, blank=True)
     price = models.FloatField()
+    costumer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cart", blank=True, default=0)
 
     def __str__(self):
         return f"{self.quantity} x {self.product}"
@@ -62,6 +63,7 @@ class CartItem(models.Model):
 class Order(models.Model):
     items = models.ManyToManyField(CartItem, related_name="orders")
     total_price = models.IntegerField(default=0)
+    costumer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders", blank=True, default=0)
 
     def __str__(self):
-        return f"{self.}"
+        return f"{self.id}"

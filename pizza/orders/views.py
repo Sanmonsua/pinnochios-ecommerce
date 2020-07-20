@@ -4,7 +4,7 @@ from .forms import RegistrationForm
 from django.core import serializers
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect
-from .models import Category, Product, Topping
+from .models import Category, Product, Topping, CartItem
 
 
 def index(request):
@@ -56,6 +56,21 @@ def product_detail(request, product_id):
         "addons" : addons
     }
     return JsonResponse(product_data)
+
+
+def get_cart(request):
+    cart = request.user.cart.all()
+    cart_data = {
+        "cart" : [
+            {
+                "product" : str(item.product),
+                "quantity" : item.quantity,
+                "price" : item.price
+            }
+            for item in cart
+        ]
+    }
+    return JsonResponse(cart_data)
 
 
 def do_login(request):

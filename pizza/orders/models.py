@@ -18,8 +18,6 @@ class Category(models.Model):
         return f"{self.name}"
 
 
-
-
 class Product(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField(blank=True)
@@ -57,7 +55,13 @@ class CartItem(models.Model):
     add_ons = models.ManyToManyField(AddOn, blank=True)
     price = models.FloatField()
 
+    def __str__(self):
+        return f"{self.quantity} x {self.product}"
+
 
 class Order(models.Model):
     items = models.ManyToManyField(CartItem, related_name="orders")
     total_price = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.}"

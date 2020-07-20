@@ -50,10 +50,10 @@ class AddOn(models.Model):
 
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
     toppings = models.ManyToManyField(Topping, blank=True)
     add_ons = models.ManyToManyField(AddOn, blank=True)
-    price = models.FloatField()
+    price = models.FloatField(default=0)
     costumer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cart", blank=True, default=0)
 
     def __str__(self):

@@ -24,6 +24,28 @@ Home - Pinocchios Pizza & Subs
   </div>
   {% endverbatim %}
 </script>
+<script id="cart-item" type="text/template">
+  {% verbatim %}
+  <div class="card mb-3 w-90">
+    <div class="row no-gutters">
+      <div class="col-4">
+        <img src="{{image}}" class="card-img" width="100" height="100">
+      </div>
+      <div class="col-6">
+        <div class="card-body">
+          <p>{{name}}</p>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="card-body">
+          <p>${{price}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endverbatim %}
+</script>
+
 <script src="{% static 'orders/index.js' %}" charset="utf-8"></script>
 {% endblock %}
 
@@ -169,22 +191,8 @@ Home - Pinocchios Pizza & Subs
       <div class="modal-body">
         <div class="py-5">
           <h5 class="text-muted text-center" hidden="true">Looks empty around here</h5>
-          <div class="card mb-3 w-90">
-            <div class="row no-gutters">
-              <div class="col-4">
-                <img src="{% static 'orders/logo.png' %}" class="card-img" width="100" height="100">
-              </div>
-              <div class="col-6">
-                <div class="card-body">
-                  <p >2 x Cheese - Regular pizza</p>
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="card-body">
-                  <p>$13.87</p>
-                </div>
-              </div>
-            </div>
+          <div class="cart-items-list">
+
           </div>
         </div>
       </div>

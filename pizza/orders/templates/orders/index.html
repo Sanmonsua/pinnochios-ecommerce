@@ -37,17 +37,10 @@ Home - Pinocchios Pizza & Subs
 
   <div class="container col-2 col-md-3 col-lg-3 col-xl-2">
 
-    <div class="dropdown">
-      <a href="#" class="cart position-relative d-inline-flex dropdown-toggle" aria-label="View your shopping cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-        <i class="fas fa fa-shopping-cart fa-lg"></i>
-        <span class="cart-basket d-flex align-items-center justify-content-center">0</span>
-      </a>
-      <div class="dropdown-menu pull-right" style="right: 0; left: auto;">
-        <h6 class="dropdown-header">Hello {{username}}</h6>
-        <a class="dropdown-item" href="#">Your orders</a>
-        <a class="dropdown-item " href="/logout">Logout</a>
-      </div>
-    </div>
+    <a href="" class="cart position-relative d-inline-flex" aria-label="View your shopping cart" data-toggle="modal" data-target="#cart-modal">
+      <i class="fas fa fa-shopping-cart fa-lg"></i>
+      <span class="cart-basket d-flex align-items-center justify-content-center">0</span>
+    </a>
 
     <div class="dropdown">
       <button id="user-icon-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20"><i class='fas fa-user-circle'></i></button>
@@ -92,7 +85,7 @@ Home - Pinocchios Pizza & Subs
                 </div>
                 <div class="row">
                   <p class="card-text col-8"><strong>$ {{p.small_price|floatformat:2}} - {{p.large_price|floatformat:2}}</strong></p>
-                  <button style="margin-bottom:0;" class="col-4 product btn btn-primary button" data-product="{{p.id}}" data-toggle="modal" data-target="#staticBackdrop">Add</button>
+                  <button style="margin-bottom:0;" class="col-4 product btn btn-primary button" data-product="{{p.id}}" data-toggle="modal" data-target="#addtocart-modal">Add</button>
                 </div>
 
               </div>
@@ -109,7 +102,7 @@ Home - Pinocchios Pizza & Subs
   </div>
 </section>
 <!-- Modal Section (PopUp for the add to cart form)-->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="addtocart-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div style="border-radius:15px" class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -158,6 +151,46 @@ Home - Pinocchios Pizza & Subs
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary button">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart modal -->
+<div class="modal fade" id="cart-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Your Cart</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="py-5">
+          <h5 class="text-muted text-center" hidden="true">Looks empty around here</h5>
+          <div class="card mb-3 w-90">
+            <div class="row no-gutters">
+              <div class="col-4">
+                <img src="{% static 'orders/logo.png' %}" class="card-img" width="100" height="100">
+              </div>
+              <div class="col-6">
+                <div class="card-body">
+                  <p >2 x Cheese - Regular pizza</p>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="card-body">
+                  <p>$13.87</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="" style="color:#5e5e5e" class="btn btn-link">Clear Cart</a>
+        <button type="button" class="btn btn-primary button">Checkout</button>
       </div>
     </div>
   </div>

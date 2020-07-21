@@ -63,7 +63,10 @@ def get_cart(request):
     cart_data = {
         "cart" : [
             {
-                "product" : str(item.product),
+                "product" : {
+                    "name" : str(item.product),
+                    "img" : item.product.image.url
+                },
                 "quantity" : item.quantity,
                 "price" : item.price
             }

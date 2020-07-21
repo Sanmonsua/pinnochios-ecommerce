@@ -28,17 +28,17 @@ Home - Pinocchios Pizza & Subs
   {% verbatim %}
   <div class="card mb-3 w-90">
     <div class="row no-gutters">
-      <div class="col-4">
-        <img src="{{image}}" class="card-img" width="100" height="100">
+      <div class="col-2">
+        <img src="{{product.img}}" class="card-img" width="auto" height="55">
       </div>
-      <div class="col-6">
+      <div class="col-8">
         <div class="card-body">
-          <p>{{name}}</p>
+          <p>{{quantity}} x {{product.name}}</p>
         </div>
       </div>
       <div class="col-2">
         <div class="card-body">
-          <p>${{price}}</p>
+          <h6>${{price}}</h6>
         </div>
       </div>
     </div>
@@ -61,7 +61,7 @@ Home - Pinocchios Pizza & Subs
 
     <a href="" class="cart position-relative d-inline-flex" aria-label="View your shopping cart" data-toggle="modal" data-target="#cart-modal">
       <i class="fas fa fa-shopping-cart fa-lg"></i>
-      <span class="cart-basket d-flex align-items-center justify-content-center">0</span>
+      <span class="cart-basket d-flex align-items-center justify-content-center" id="cart-count"></span>
     </a>
 
     <div class="dropdown">
@@ -190,15 +190,15 @@ Home - Pinocchios Pizza & Subs
       </div>
       <div class="modal-body">
         <div class="py-5">
-          <h5 class="text-muted text-center" hidden="true">Looks empty around here</h5>
-          <div class="cart-items-list">
+          <h5 class="text-muted text-center" hidden id="cart-empty-label">Looks empty around here</h5>
+          <div id="cart-items-list">
 
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <a href="" style="color:#5e5e5e" class="btn btn-link">Clear Cart</a>
-        <button type="button" class="btn btn-primary button">Checkout</button>
+        <button style="color:#5e5e5e" class="btn btn-link" id="clear-cart">Clear Cart</button>
+        <button type="button" class="btn btn-primary button" id="checkout">Checkout</button>
       </div>
     </div>
   </div>

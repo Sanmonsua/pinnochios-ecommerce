@@ -233,3 +233,7 @@ a.cart {
     max-height: calc(100% - 120px);
     overflow-y: scroll;
 }
+
+.btn-primary.disabled, .btn-primary:disabled {
+    border: none;
+}

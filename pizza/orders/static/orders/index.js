@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
       get_product(p.dataset.product);
     }
   });
+
+  document.querySelector('#addtocart-form').onsubmit = addToCart;
 });
 
 
@@ -20,11 +22,13 @@ function get_product(product_id){
 
   request.onload = () => {
     const data = JSON.parse(request.responseText);
-    console.log(data)
+    document.querySelector("#product-info").setAttribute('data-id', data.id)
     document.querySelector("#product-name").innerHTML = data.name + " - " + data.category;
     document.querySelector("#product-description").innerHTML = data.description;
-    document.querySelector("#product-small-price").innerHTML = "Small $" + data.smallPrice;
-    document.querySelector("#product-large-price").innerHTML = "Large $" + data.largePrice;
+    document.querySelector("#product-small-price-label").innerHTML = "Small $" + data.smallPrice;
+    document.querySelector("#product-small-price-radio").value = data.smallPrice;
+    document.querySelector("#product-large-price-label").innerHTML = "Large $" + data.largePrice;
+    document.querySelector("#product-large-price-radio").value = data.largePrice;
     let toppingsSection = document.querySelector('#toppings');
     toppingsSection.innerHTML = "";
     if (data.toppings.length > 0){
@@ -81,4 +85,74 @@ function load_cart() {
 
 
   request.send()
+}
+
+
+function closeAllModals() {
+
+    const modals = document.getElementsByClassName('modal');
+
+    for(let i=0; i<modals.length; i++) {
+      modals[i].classList.remove('show');
+      modals[i].setAttribute('aria-hidden', 'true');
+      modals[i].setAttribute('style', 'display: none');
+    }
+
+    const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
+
+    for(let i=0; i<modalsBackdrops.length; i++) {
+      document.body.removeChild(modalsBackdrops[i]);
+    }
+}
+
+
+function addToCart(){
+  const request = new XMLHttpRequest();
+  request.open('POST', 'addtocart')
+
+  request.onload = () =>{
+      load_cart();
+      closeAllModals();
+  }
+
+  const data = new FormData();
+  let price = 0;
+  console.log(document.querySelector('#product-info').dataset.id);
+  const product_id = document.querySelector('#product-info').dataset.id;
+  data.append('product_id', product_id);
+
+  const quantity = 1;
+  data.append('quantity', quantity);
+
+  let toppings = [];
+  document.querySelectorAll('.topping').forEach( t =>{
+    if (t.checked){
+      toppings.push(t.dataset.id);
+    }
+  });
+  data.append('toppings', toppings);
+
+  let addons = [];
+  document.querySelectorAll('.addon').forEach( a =>{
+    if (a.checked){
+      addons.push(a.dataset.id)
+      price += a.dataset.price;
+    }
+
+  });
+  data.append('addons', addons);
+
+  document.querySelectorAll('.size-radio').forEach( s =>{
+    if (s.checked){
+      price += s.value;
+    }
+  });
+  data.append('price', price);
+
+  csrfmiddlewaretoken = document.querySelector("#addtocart-form input[name='csrfmiddlewaretoken']").value;
+  data.append('csrfmiddlewaretoken', csrfmiddlewaretoken);
+
+  request.send(data);
+
+  return false;
 }

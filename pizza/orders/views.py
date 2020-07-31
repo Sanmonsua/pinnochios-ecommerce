@@ -96,6 +96,12 @@ def addToCart(request):
         return JsonResponse({'success':True})
 
 
+def clear_cart(request):
+    cart = request.user.cart.all()
+    cart.delete()
+    return redirect('/')
+    
+
 def do_login(request):
     #This view logs in the user
     form = AuthenticationForm()

@@ -68,6 +68,8 @@ def get_cart(request):
                     "name" : str(item.product),
                     "img" : item.product.image.url
                 },
+                "toppings" : [str(t) for t in item.toppings.all()],
+                "addons" : [str(a) for a in item.add_ons.all()],
                 "quantity" : item.quantity,
                 "price" : item.price
             }
@@ -82,16 +84,21 @@ def addToCart(request):
         data = request.POST.copy()
         product_id = data.get('product_id')
         quantity = data.get('quantity')
-        toppings = data.getlist('toppings')
-        print(toppings)
-        addons = data.getlist('addons')
+        toppings = data.get('toppings').split(',')
+        addons = data.get('addons').split(',')
         price = data.get('price')
-
         product = Product.objects.get(pk=product_id)
-
         cart_item = CartItem(product=product, costumer=request.user, quantity=quantity, price=price)
-
         cart_item.save()
+        for t in toppings:
+            if t != '':
+                topping = Topping.objects.get(pk=t)
+                cart_item.toppings.add(topping)
+
+        for a in addons:
+            if a != '':
+                addon = AddOn.objects.get(pk=a)
+                cart_item.add_ons.add(addon)
 
         return JsonResponse({'success':True})
 
@@ -100,7 +107,7 @@ def clear_cart(request):
     cart = request.user.cart.all()
     cart.delete()
     return redirect('/')
-    
+
 
 def do_login(request):
     #This view logs in the user

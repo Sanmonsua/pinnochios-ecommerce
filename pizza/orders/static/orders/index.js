@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   });
 
-  document.querySelector('#addtocart-form').onsubmit = addToCart;
+  document.querySelector('#addToCartButton').onclick = addToCart;
 });
 
 
@@ -117,7 +117,6 @@ function addToCart(){
 
   const data = new FormData();
   let price = 0;
-  console.log(document.querySelector('#product-info').dataset.id);
   const product_id = document.querySelector('#product-info').dataset.id;
   data.append('product_id', product_id);
 
@@ -127,7 +126,7 @@ function addToCart(){
   let toppings = [];
   document.querySelectorAll('.topping').forEach( t =>{
     if (t.checked){
-      toppings.push(t.dataset.id);
+      toppings.push(t.id);
     }
   });
   data.append('toppings', toppings);
@@ -135,8 +134,8 @@ function addToCart(){
   let addons = [];
   document.querySelectorAll('.addon').forEach( a =>{
     if (a.checked){
-      addons.push(a.dataset.id)
-      price += a.dataset.price;
+      addons.push(a.id)
+      price += parseFloat(a.dataset.price);
     }
 
   });
@@ -144,15 +143,12 @@ function addToCart(){
 
   document.querySelectorAll('.size-radio').forEach( s =>{
     if (s.checked){
-      price += s.value;
+      price += parseFloat(s.value);
     }
   });
   data.append('price', price);
-
   csrfmiddlewaretoken = document.querySelector("#addtocart-form input[name='csrfmiddlewaretoken']").value;
-  data.append('csrfmiddlewaretoken', csrfmiddlewaretoken);
+  data.append('csrfmiddlewaretoken', window.CSRF_TOKEN);
 
   request.send(data);
-
-  return false;
 }

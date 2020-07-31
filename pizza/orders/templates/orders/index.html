@@ -8,10 +8,15 @@ Home - Pinocchios Pizza & Subs
 {% endblock %}
 
 {% block templates %}
+<script type="text/javascript">
+    // A CSRF token is required when making post requests in Django
+    // To be used for making AJAX requests in script.js
+    window.CSRF_TOKEN = "{{ csrf_token }}";
+</script>
 <script id="topping" type="text/template">
   {% verbatim %}
   <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input topping" data-id="{{id}}">
+    <input type="checkbox" class="custom-control-input topping" id="{{id}}" name="groupOfCheckboxes">
     <label class="custom-control-label" for="{{id}}">{{name}}</label>
   </div>
   {% endverbatim %}
@@ -19,7 +24,7 @@ Home - Pinocchios Pizza & Subs
 <script id="addon" type="text/template">
   {% verbatim %}
   <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input addon" data-id="{{id}}" data-price="{{price}}">
+    <input type="checkbox" class="custom-control-input addon" id="{{id}}" data-price="{{price}}">
     <label class="custom-control-label" for="{{id}}">{{name}}. + ${{price}}</label>
   </div>
   {% endverbatim %}
@@ -126,7 +131,7 @@ Home - Pinocchios Pizza & Subs
 <!-- Modal Section (PopUp for the add to cart form)-->
 <div class="modal fade" id="addtocart-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div style="border-radius:15px" class="modal-dialog modal-lg modal-dialog-scrollable">
-    <form class="modal-content" id="addtocart-form">
+    <div class="modal-content" id="addtocart-form">
       {% csrf_token %}
 
       <div class="modal-header">
@@ -149,11 +154,11 @@ Home - Pinocchios Pizza & Subs
             <h5>Select the size:</h5>
             <hr>
             <div class="custom-control custom-radio">
-              <input type="radio" id="product-small-price-radio" class="custom-control-input size-radio" checked>
+              <input type="radio" id="product-small-price-radio" class="custom-control-input size-radio" checked name="groupOfDefaultRadios">
               <label class="custom-control-label" id="product-small-price-label" for="product-small-price-radio"></label>
             </div>
             <div class="custom-control custom-radio">
-              <input type="radio" id="product-large-price-radio" class="custom-control-input size-radio">
+              <input type="radio" id="product-large-price-radio" class="custom-control-input size-radio" name="groupOfDefaultRadios">
               <label class="custom-control-label" for="product-large-price-radio" id="product-large-price-label"></label>
             </div>
             <br>
@@ -178,7 +183,7 @@ Home - Pinocchios Pizza & Subs
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary button" id="addToCartButton">Add to cart</button>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 

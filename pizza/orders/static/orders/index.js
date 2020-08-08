@@ -66,11 +66,13 @@ function load_cart() {
     const cart = data.cart;
     document.querySelector('#cart-count').innerHTML = cart.length;
     document.querySelector('#cart-items-list').innerHTML = "";
+    var total_price = 0;
     if (cart.length > 0){
       document.querySelector('#cart-empty-label').setAttribute("hidden", "true");
       document.querySelector('#clear-cart').removeAttribute("disabled");
       document.querySelector('#checkout').removeAttribute("disabled");
       cart.forEach( item =>{
+        total_price += item.price;
         const item_content = cartItemTemplate(item);
         document.querySelector('#cart-items-list').innerHTML += item_content;
       })
@@ -79,6 +81,8 @@ function load_cart() {
       document.querySelector('#clear-cart').disabled = "true";
       document.querySelector('#checkout').disabled = "true";
     }
+
+    document.querySelector('#checkout').innerHTML = `Checkout $ ${total_price}`;
 
   }
 

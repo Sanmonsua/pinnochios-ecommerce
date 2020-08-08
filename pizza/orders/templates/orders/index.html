@@ -39,6 +39,16 @@ Home - Pinocchios Pizza & Subs
       <div class="col-8">
         <div class="card-body">
           <p>{{quantity}} x {{product.name}}</p>
+          <p class="text-muted">
+            {{#each toppings}}
+              {{name}}
+              <br>
+            {{/each}}
+            {{#each addons}}
+              {{name}} + ${{price}}
+              <br>
+            {{/each}}
+          </p>
         </div>
       </div>
       <div class="col-2">
@@ -107,8 +117,9 @@ Home - Pinocchios Pizza & Subs
             <div class="col-8">
               <div class="card-body">
                 <h5 class="card-title"><strong>{{p.name}}</strong></h5>
-                <div style="height:60px">
+                <div class="h-100">
                   <p class="card-text text-muted">{{p.description}}</p>
+                  <br>
                 </div>
                 <div class="row">
                   <p class="card-text col-8"><strong>$ {{p.small_price|floatformat:2}} - {{p.large_price|floatformat:2}}</strong></p>

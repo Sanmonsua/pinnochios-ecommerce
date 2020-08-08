@@ -71,7 +71,6 @@ function load_cart() {
       document.querySelector('#clear-cart').removeAttribute("disabled");
       document.querySelector('#checkout').removeAttribute("disabled");
       cart.forEach( item =>{
-        console.log(item);
         const item_content = cartItemTemplate(item);
         document.querySelector('#cart-items-list').innerHTML += item_content;
       })
@@ -151,4 +150,5 @@ function addToCart(){
   data.append('csrfmiddlewaretoken', window.CSRF_TOKEN);
 
   request.send(data);
+  return false;
 }

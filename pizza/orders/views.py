@@ -68,8 +68,13 @@ def get_cart(request):
                     "name" : str(item.product),
                     "img" : item.product.image.url
                 },
-                "toppings" : [str(t) for t in item.toppings.all()],
-                "addons" : [str(a) for a in item.add_ons.all()],
+                "toppings" : [{
+                    "name": str(t)
+                } for t in item.toppings.all()],
+                "addons" : [{
+                    "name":a.name,
+                    "price":a.price
+                } for a in item.add_ons.all()],
                 "quantity" : item.quantity,
                 "price" : item.price
             }

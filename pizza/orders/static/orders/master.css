@@ -237,3 +237,7 @@ a.cart {
 .btn-primary.disabled, .btn-primary:disabled {
     border: none;
 }
+
+#order-summary-section {
+  overflow-y: auto;
+}

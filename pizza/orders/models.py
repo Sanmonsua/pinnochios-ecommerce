@@ -61,9 +61,9 @@ class CartItem(models.Model):
 
 
 class Order(models.Model):
-    items = models.ManyToManyField(CartItem, related_name="orders")
     total_price = models.FloatField(default=0)
     costumer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders", blank=True, default=0)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.id}"

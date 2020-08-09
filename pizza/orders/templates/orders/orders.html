@@ -1,0 +1,97 @@
+{% extends 'orders/base.html' %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+Your orders - Pinocchios Pizza & Subs
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-light sticky-top bg-light">
+  <div class="container col">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'orders/logo2.png' %}" width="auto" height="55" class="d-inline-block align-top" alt="" loading="lazy">
+    </a>
+  </div>
+
+  <div class="container col-2 col-md-3 col-lg-3 col-xl-2">
+
+    <a href="" class="cart position-relative d-inline-flex" aria-label="View your shopping cart" data-toggle="modal" data-target="#cart-modal">
+      <i class="fas fa fa-shopping-cart fa-lg"></i>
+      <span class="cart-basket d-flex align-items-center justify-content-center" id="cart-count"></span>
+    </a>
+
+    <div class="dropdown">
+      <button id="user-icon-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20"><i class='fas fa-user-circle'></i></button>
+      <div class="dropdown-menu pull-right" style="right: 0; left: auto;">
+        <h6 class="dropdown-header">Hello {{username}}</h6>
+        <a class="dropdown-item" href="/your-orders">Your orders</a>
+        <a class="dropdown-item " href="/logout">Logout</a>
+      </div>
+    </div>
+
+  </div>
+
+
+</nav>
+<section id="orders">
+  <div class="container">
+    <h1>Your orders</h1>
+    <div class="card-deck">
+      {%for order in orders%}
+      <div class="product-box col-12 col-sm-6 mb-4 h-100">
+        <div class="card" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title"><strong>Order #{{order}}</strong></h5>
+                <div class="h-100">
+                  <p class="card-text text-muted">${{order.total_price|floatformat:2}} - Made on {{ order.date|date:'Y-m-d H:i' }}</p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<script type="text/javascript">
+const request = new XMLHttpRequest();
+request.open('GET', 'cart')
+
+request.onload = () =>{
+  const data = JSON.parse(request.responseText);
+  const cart = data.cart;
+  document.querySelector('#cart-count').innerHTML = cart.length;
+  document.querySelector('#cart-items-list').innerHTML = "";
+  var total_price = 0;
+  if (cart.length > 0){
+    document.querySelector('#cart-empty-label').setAttribute("hidden", "true");
+    document.querySelector('#clear-cart').removeAttribute("disabled");
+    document.querySelector('#checkout').removeAttribute("disabled");
+    cart.forEach( item =>{
+      total_price += item.price;
+      const item_content = cartItemTemplate(item);
+      document.querySelector('#cart-items-list').innerHTML += item_content;
+    })
+  } else {
+    document.querySelector('#cart-empty-label').removeAttribute("hidden");
+    document.querySelector('#clear-cart').disabled = "true";
+    document.querySelector('#checkout').disabled = "true";
+  }
+
+  document.querySelector('#checkout').innerHTML = `Checkout $ ${total_price}`;
+
+}
+
+
+request.send()
+</script>
+{% endblock %}

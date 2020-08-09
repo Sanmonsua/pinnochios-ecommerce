@@ -4,8 +4,10 @@ from .forms import RegistrationForm
 from django.core import serializers
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect
-from .models import Category, Product, Topping, CartItem, AddOn
+from .models import Category, Product, Topping, CartItem, AddOn, Order
+import stripe
 
+stripe.api_key = "sk_test_51HE29lKcPIFcZJbWSiQEYLRm0nKCaZ8UOe5t3quNstheHtAetWh6BvqRiWPXDYw93mHMbwG2hNtioopiVsd3ulCv00D0AMeu2g"
 
 def index(request):
     if request.user.is_authenticated:
@@ -157,3 +159,52 @@ def signup(request):
 def do_logout(request):
     logout(request)
     return redirect('/')
+
+
+def calculate_order_amount(cart):
+    total = 0
+    for item in cart:
+        total += item.price
+    return total
+
+
+def checkout(request):
+
+    cart = request.user.cart.all()
+    total = calculate_order_amount(cart)
+
+    if request.method == 'GET':
+        return render(request, 'orders/checkout.html', context={
+            "cart":cart,
+            "total":total
+        })
+    else:
+        paymentIntentId = request.POST.get('paymentIntentId')
+        if paymentIntentId != None:
+            order = Order(total_price=total, costumer=request.user)
+            order.save()
+            cart = request.user.cart.all()
+            cart.delete()
+            return redirect('/your-orders')
+
+
+
+def charge(request):
+    try:
+        intent = stripe.PaymentIntent.create(
+            amount=int(calculate_order_amount(request.user.cart.all())*100),
+            currency='usd'
+        )
+        return JsonResponse({
+          'clientSecret': intent['client_secret']
+        })
+    except Exception as e:
+        return JsonResponse({'error':str(e)})
+
+
+def get_orders(request):
+    context = {
+        "orders" : request.user.orders.all(),
+        "username" : request.user.username
+    }
+    return render(request, 'orders/orders.html', context=context)

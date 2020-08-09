@@ -201,7 +201,7 @@ a.cart {
 }
 
 .card-img {
-  border-radius: 15px;
+  border-radius: 15%;
 }
 
 .modal-content {
@@ -231,7 +231,11 @@ a.cart {
 .modal-body {
     /* 100% = dialog height, 120px = header + footer */
     max-height: calc(100% - 120px);
-    overflow-y: scroll;
+}
+
+#add-product-form{
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .btn-primary.disabled, .btn-primary:disabled {

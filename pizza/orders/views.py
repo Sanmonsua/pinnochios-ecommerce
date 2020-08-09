@@ -49,6 +49,7 @@ def product_detail(request, product_id):
         addons.append(a)
     product_data = {
         "id" : p.id,
+        "image_url" : p.image.url,
         "name" : p.name,
         "description" : p.description,
         "category" : p.category.name,

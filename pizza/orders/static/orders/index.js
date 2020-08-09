@@ -22,6 +22,8 @@ function get_product(product_id){
 
   request.onload = () => {
     const data = JSON.parse(request.responseText);
+    console.log(data);
+    document.querySelector('#product-image').setAttribute('src', data.image_url)
     document.querySelector("#product-info").setAttribute('data-id', data.id)
     document.querySelector("#product-name").innerHTML = data.name + " - " + data.category;
     document.querySelector("#product-description").innerHTML = data.description;

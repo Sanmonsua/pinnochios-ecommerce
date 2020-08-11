@@ -14,85 +14,89 @@ Home - Pinocchios Pizza & Subs
     window.CSRF_TOKEN = "{{ csrf_token }}";
 </script>
 <script id="topping" type="text/template">
-  {% verbatim %}
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input topping" id="{{id}}" name="groupOfCheckboxes">
-    <label class="custom-control-label" for="{{id}}">{{name}}</label>
-  </div>
-  {% endverbatim %}
-</script>
-<script id="addon" type="text/template">
-  {% verbatim %}
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input addon" id="{{id}}" data-price="{{price}}">
-    <label class="custom-control-label" for="{{id}}">{{name}}. + ${{price}}</label>
-  </div>
-  {% endverbatim %}
-</script>
-<script id="cart-item" type="text/template">
-  {% verbatim %}
-  <div class="card mb-3 w-90">
-    <div class="row no-gutters">
-      <div class="col-2">
-        <img src="{{product.img}}" class="card-img" width="auto" height="55">
-      </div>
-      <div class="col-8">
-        <div class="card-body">
-          <p>{{quantity}} x {{product.name}}</p>
-          <p class="text-muted">
-            {{#each toppings}}
-              {{name}}
-              <br>
-            {{/each}}
-            {{#each addons}}
-              {{name}} + ${{price}}
-              <br>
-            {{/each}}
-          </p>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="card-body">
-          <h6>${{price}}</h6>
-        </div>
-      </div>
+    {% verbatim %}
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input topping" id="{{id}}" name="groupOfCheckboxes">
+        <label class="custom-control-label" for="{{id}}">{{name}}</label>
     </div>
-  </div>
-  {% endverbatim %}
+    {% endverbatim %}
 </script>
+    <script id="addon" type="text/template">
+        {% verbatim %}
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input addon" id="{{id}}" data-price="{{price}}">
+            <label class="custom-control-label" for="{{id}}">{{name}}. + ${{price}}</label>
+        </div>
+        {% endverbatim %}
+    </script>
+    <script id="cart-item" type="text/template">
+        {% verbatim %}
+        <div class="card mb-3 w-90">
+            <div class="row no-gutters">
+                <div class="col-2">
+                    <img src="{{product.img}}" class="card-img" width="100" height="100">
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <p>{{quantity}} x {{product.name}}</p>
+                        <p class="text-muted">
+                            {{#each toppings}}
+                            {{name}}
+                            <br>
+                            {{/each}}
+                            {{#each addons}}
+                            {{name}} + ${{price}}
+                            <br>
+                            {{/each}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-body text-right">
+                        <h6>${{price}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endverbatim %}
+    </script>
 
-<script src="{% static 'orders/index.js' %}" charset="utf-8"></script>
+    <script src="{% static 'orders/index.js' %}" charset="utf-8"></script>
 {% endblock %}
 
 {% block content %}
-<nav class="navbar navbar-light sticky-top bg-light">
-  <div class="container col">
-    <a class="navbar-brand" href="/">
-      <img src="{% static 'orders/logo2.png' %}" width="auto" height="55" class="d-inline-block align-top" alt="" loading="lazy">
-    </a>
-  </div>
+    <nav class="navbar navbar-light sticky-top bg-light">
+        <div class="container col-sm-6">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'orders/logo2.png' %}" width="auto" height="55" class="d-inline-block align-top"
+                     alt="" loading="lazy">
+            </a>
+        </div>
 
-  <div class="container col-2 col-md-3 col-lg-3 col-xl-2">
+        <div class="container col-12 col-sm-4 col-md-3">
 
-    <a href="" class="cart position-relative d-inline-flex" aria-label="View your shopping cart" data-toggle="modal" data-target="#cart-modal">
-      <i class="fas fa fa-shopping-cart fa-lg"></i>
-      <span class="cart-basket d-flex align-items-center justify-content-center" id="cart-count"></span>
-    </a>
+            <a href="" class="cart position-relative d-inline-flex float-right" aria-label="View your shopping cart"
+               data-toggle="modal" data-target="#cart-modal">
+                <i class="fas fa fa-shopping-cart fa-lg"></i>
+                <span class="cart-basket d-flex align-items-center justify-content-center" id="cart-count"></span>
+            </a>
 
-    <div class="dropdown">
-      <button id="user-icon-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20"><i class='fas fa-user-circle'></i></button>
-      <div class="dropdown-menu pull-right" style="right: 0; left: auto;">
-        <h6 class="dropdown-header">Hello {{username}}</h6>
-        <a class="dropdown-item" href="/your-orders">Your orders</a>
-        <a class="dropdown-item " href="/logout">Logout</a>
-      </div>
-    </div>
+            <div class="dropdown">
+                <button id="user-icon-button" type="button" class="btn dropdown-toggle float-right"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20"><i
+                        class='fas fa-user-circle'></i></button>
+                <div class="dropdown-menu pull-right" style="right: 0; left: auto;">
+                    <h6 class="dropdown-header">Hello {{ username }}</h6>
+                    <a class="dropdown-item" href="/your-orders">Your orders</a>
+                    <a class="dropdown-item " href="/logout">Logout</a>
+                </div>
+            </div>
 
-  </div>
+        </div>
 
 
-</nav>
-<section class="jumbotron text-center">
+    </nav>
+    <section class="jumbotron text-center">
   <div class="container">
     <h1 class="my-2">Our Menu</h1>
     <p class="lead text-muted my-2">
@@ -100,29 +104,30 @@ Home - Pinocchios Pizza & Subs
       We sell award-winning sicilian-style pizza and mouth-watering steak subs!
     </p>
   </div>
-</section>
-<section id="menu">
-  <div class="container">
-    {% for c in categories %}
-    <h1 class="py-5"><strong>{{c.name}}</strong></h1>
+    </section>
+    <section id="menu">
+        <div class="container">
+            {% for c in categories %}
+                <h1 class="py-5"><strong>{{ c.name }}</strong></h1>
 
-    <div class="card-deck">
-      {%for p in c.products%}
-      <div class="product-box col-12 col-sm-6 mb-4 h-100">
-        <div class="card" style="max-width: 540px;">
-          <div class="row no-gutters">
-            <div class="col-4">
-              <img src="{{ p.image.url }}" width="150" height="150" class="card-img">
-            </div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title"><strong>{{p.name}}</strong></h5>
-                <div class="h-100">
-                  <p class="card-text text-muted">{{p.description}}</p>
-                  <br>
-                </div>
-                <div class="row">
-                  <p class="card-text col-8"><strong>$ {{p.small_price|floatformat:2}} - {{p.large_price|floatformat:2}}</strong></p>
+                <div class="card-deck">
+                    {% for p in c.products %}
+                        <div class="product-box col-md-12 col-lg-6 mb-4 h-100">
+                            <div class="card" style="max-width: 540px;">
+                                <div class="row no-gutters">
+                                    <div class="col-4">
+                                        <img src="{{ p.image.url }}" width="150" height="150" class="card-img">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><strong>{{ p.name }}</strong></h5>
+                                            <div class="h-100">
+                                                <p class="card-text text-muted">{{ p.description }}</p>
+                                                <br>
+                                            </div>
+                                            <div class="row">
+                                                <p class="card-text col-8"><strong>$ {{ p.small_price|floatformat:2 }}
+                                                    - {{ p.large_price|floatformat:2 }}</strong></p>
                   <button style="margin-bottom:0;" class="col-4 product btn btn-primary button" data-product="{{p.id}}" data-toggle="modal" data-target="#addtocart-modal">Add</button>
                 </div>
 
@@ -191,37 +196,39 @@ Home - Pinocchios Pizza & Subs
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="submit" data-dismiss="modal" class="btn btn-primary button" id="addToCartButton">Add to cart</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Cart modal -->
-<div class="modal fade" id="cart-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Your Cart</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="py-5">
-          <h5 class="text-muted text-center" hidden id="cart-empty-label">Looks empty around here</h5>
-          <div id="cart-items-list">
-
-          </div>
+        <div class="modal-footer">
+            <button type="submit" data-dismiss="modal" class="btn btn-primary button" id="addToCartButton">Add to cart
+            </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <a href="clear-cart" style="color:#5e5e5e" class="btn btn-link" id="clear-cart">Clear Cart</a>
-        <a href="checkout" class="btn btn-primary button" id="checkout">Checkout</a>
-      </div>
     </div>
   </div>
 </div>
+
+    <!-- Cart modal -->
+    <div class="modal fade" id="cart-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Your Cart</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="overflow: auto">
+                    <div class="py-5">
+                        <h5 class="text-muted text-center" hidden id="cart-empty-label">Looks empty around here</h5>
+                        <div id="cart-items-list">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="clear-cart" style="color:#5e5e5e" class="btn btn-link" id="clear-cart">Clear Cart</a>
+                    <a href="checkout" class="btn btn-primary button" id="checkout">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

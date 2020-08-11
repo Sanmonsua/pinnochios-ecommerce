@@ -216,7 +216,7 @@ a.cart {
 .custom-radio .custom-control-input:checked~.custom-control-label::before,
 .custom-radio .custom-control-input:checked~.custom-control-label::after {
   background-color: #cb2d3e;
-  background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns= 'http://www.w3.org/2000/svg' viewBox= '-4 -4 8 8' %3E%3Ccircle r= '3' fill= '%23fff' /%3E%3C/svg%3E);
+  background-image: url(data:image/svg+xml;charset=utf8,%3Csvgxmlns= 'http://www.w3.org/2000/svg' viewBox= '-4 -4 8 8' %3E%3Ccircler= '3' fill= '%23fff' /%3E%3C/svg%3E);
   border-radius: 50%;
 }
 
@@ -240,9 +240,21 @@ a.cart {
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
-    border: none;
+  border: none;
 }
 
 #order-summary-section {
   overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  #checkout-logo-section {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    display: none;
+  }
 }

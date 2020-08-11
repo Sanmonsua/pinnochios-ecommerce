@@ -8,15 +8,17 @@ body {
     font-weight: 300;
 }
 
-@media (min-width: 576px)
-.jumbotron {
+@media (min-width: 576px) {
+  .jumbotron {
     padding: 4rem 2rem;
+  }
 }
 
-@media (min-width: 768px)
-.jumbotron {
+@media (min-width: 768px) {
+  .jumbotron {
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
 }
 
 .navbar {
@@ -182,7 +184,7 @@ a.cart {
 
 #user-icon-button:hover {
   color: #cb2d3e;
-  border-color: none;
+  border-color: transparent;
 }
 
 .card {
@@ -213,9 +215,9 @@ a.cart {
 
 .custom-radio .custom-control-input:checked~.custom-control-label::before,
 .custom-radio .custom-control-input:checked~.custom-control-label::after {
-    background-color: #cb2d3e;
-    background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E);
-    border-radius: 50%;
+  background-color: #cb2d3e;
+  background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns= 'http://www.w3.org/2000/svg' viewBox= '-4 -4 8 8' %3E%3Ccircle r= '3' fill= '%23fff' /%3E%3C/svg%3E);
+  border-radius: 50%;
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
@@ -224,7 +226,6 @@ a.cart {
 
 .modal-dialog,
 .modal-content {
-    /* 80% of window height */
     height: 95%;
 }
 

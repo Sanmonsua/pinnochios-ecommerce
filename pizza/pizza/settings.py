@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'orders.apps.OrdersConfig',
-    'whitenoise.runserver_nostatic',
     'widget_tweaks'
 ]
 

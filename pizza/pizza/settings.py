@@ -132,7 +132,3 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # location where you will store your static files
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'pizza/static')
 ]
-
-import dj_database_url
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)

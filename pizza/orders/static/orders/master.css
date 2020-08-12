@@ -257,4 +257,8 @@ a.cart {
   .navbar-brand {
     display: none;
   }
+
+  #product-image-section {
+    display: none;
+  }
 }

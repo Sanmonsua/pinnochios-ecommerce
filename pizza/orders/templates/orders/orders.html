@@ -27,7 +27,7 @@ Your orders - Pinocchios Pizza & Subs
       <div class="dropdown-menu pull-right" style="right: 0; left: auto;">
         <h6 class="dropdown-header">Hello {{username}}</h6>
         <a class="dropdown-item" href="/your-orders">Your orders</a>
-        <a class="dropdown-item " href="/logout">Logout</a>
+          <a class="dropdown-item " href="/logout">Logout</a>
       </div>
     </div>
 
@@ -35,29 +35,33 @@ Your orders - Pinocchios Pizza & Subs
 
 
 </nav>
-<section id="orders">
-  <div class="container">
-    <h1>Your orders</h1>
-    <div class="card-deck">
-      {%for order in orders%}
-      <div class="product-box col-12 col-sm-6 mb-4 h-100">
-        <div class="card" style="max-width: 540px;">
-          <div class="row no-gutters">
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title"><strong>Order #{{order}}</strong></h5>
-                <div class="h-100">
-                  <p class="card-text text-muted">${{order.total_price|floatformat:2}} - Made on {{ order.date|date:'Y-m-d H:i' }}</p>
+    <section id="orders">
+        <div class="container">
+            {% if orders %}
+                <h1>Your orders</h1>
+            {% else %}
+                <h2 class="my-auto text-muted text-center">You have not order yet, here you will see your orders</h2>
+            {% endif %}
+            <div class="card-deck">
+                {% for order in orders %}
+                    <div class="product-box col-12 col-sm-6 mb-4 h-100">
+                        <div class="card" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><strong>Order #{{ order }}</strong></h5>
+                                        <div class="h-100">
+                                            <p class="card-text text-muted">${{ order.total_price|floatformat:2 }} -
+                                                Made on {{ order.date|date:'Y-m-d H:i' }}</p>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
       </div>
       {% endfor %}
-    </div>
+
+            </div>
 
   </div>
 </section>

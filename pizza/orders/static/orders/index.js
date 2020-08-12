@@ -2,12 +2,14 @@ const toppingTemplate = Handlebars.compile(document.querySelector('#topping').in
 const addonTemplate = Handlebars.compile(document.querySelector('#addon').innerHTML);
 const cartItemTemplate = Handlebars.compile(document.querySelector('#cart-item').innerHTML);
 
-document.addEventListener('DOMContentLoaded', ()=>{
+let maxToppings = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
 
   load_cart();
 
-  document.querySelectorAll(".product").forEach(p =>{
-    p.onclick = () =>{
+  document.querySelectorAll(".product").forEach(p => {
+    p.onclick = () => {
       get_product(p.dataset.product);
     }
   });
@@ -43,15 +45,23 @@ function get_product(product_id){
     }
     let addonsSection = document.querySelector('#addons');
     addonsSection.innerHTML = "";
-    if (data.addons.length > 0){
+    if (data.addons.length > 0) {
       document.querySelector("#addons-section").style.display = "block";
-      data.addons.forEach(a =>{
-        const addon = addonTemplate({"id":a.id, "name":a.name, "price":a.price});
+      data.addons.forEach(a => {
+        const addon = addonTemplate({"id": a.id, "name": a.name, "price": a.price});
         addonsSection.innerHTML += addon;
       });
     } else {
       document.querySelector("#addons-section").style.display = "none";
     }
+    maxToppings = data.max_toppings;
+    document.querySelectorAll("input[name='groupOfCheckboxes']").forEach(checkbox => {
+      checkbox.addEventListener('change', function () {
+        if (document.querySelectorAll("input[name='groupOfCheckboxes']:checked").length > maxToppings) {
+          checkbox.checked = false;
+        }
+      });
+    });
 
   }
 

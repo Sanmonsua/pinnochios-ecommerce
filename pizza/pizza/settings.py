@@ -24,7 +24,7 @@ MEDIA_URL = "/media/"
 SECRET_KEY = 'w*3%yqq&-h_yuve&dgodsx6%$bt)jxrp!1=n_+zie!5h$m+e_%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['pinocchios-sanmonsua-cs50.herokuapp.com',]
 
